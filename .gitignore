@@ -1,5 +1,5 @@
 # Django #
-TwojaSwinka/local_settings.py
+
 *.log
 *.pot
 *.pyc
@@ -33,7 +33,6 @@ media
 # Distribution / packaging
 .Python build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
