@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="content">
+        <div class="d-xl-table-row">
+            <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Twoje waluty</h3>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Nazwa</th>
+                                    <th>Kurs</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for currency in currencies %}
+                                    <tr>
+                                        <td>{{ currency.name }}</td>
+                                        <td>{{ currency.in_pln }}</td>
+                                        <td><a href="/currency/edit/{{ currency.id }}/">Edytuj</a></td>
+                                        <td><a href="/currency/delete/{{ currency.id }}/">Usuń</a></td>
+                                    </tr>
+                                {% endfor %}
+                                <tfoot>
+                                <tr>
+                                    <th>Nazwa</th>
+                                    <th>Kurs</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+            </div>
+        </div>
+    </section>
+{% endblock %}

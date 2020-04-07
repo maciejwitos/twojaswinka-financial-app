@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Nazwa kategorii</th>
+                        <th>Budżet</th>
+                        <th>Wydatki</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>{{ budget.category }}</td>
+                        <td>{{ budget.budget }}</td>
+                        {% if budget.budget < budget.expenses %}
+                            <td style="color: red">{{ budget.expenses }}</td>
+                        {% else %}
+                            <td style="color: darkgreen">{{ budget.expenses }}</td>
+                        {% endif %}
+                        <td><a href="/budget/edit/{{ budget.id }}/">Edytuj</a></td>
+                        <td><a href="/budget/delete/{{ budget.id }}/">Usuń</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

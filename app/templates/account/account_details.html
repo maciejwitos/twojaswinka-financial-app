@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-12">
+        <div class="card">
+        <div class="card-header">
+            <table class="table table-sm">
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Bank</th>
+                    <th>Stan konta</th>
+                    <th>Waluta</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>{{ account.name }}</td>
+                    <td>{{ account.bank }}</td>
+                    <td>{{ account.balance }}</td>
+                    <td>{{ account.currency }}</td>
+                    <td><a href="/account/edit/{{ account.id }}/">Edytuj</a></td>
+                    <td><a href="/account/delete/{{ account.id }}/">Usuń</a></td>
+                </tr>
+
+            </table>
+        </div>
+
+
+            <!-- /.card-header -->
+         <hr>
+            <div class="card-body">
+
+                <tr>
+                    <h5>Wszystkie transakcje</h5>
+                </tr>
+                <table id="example2" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Kwota</th>
+                        <th>Komentarz</th>
+                        <th>Kategoria</th>
+                        <th>Konto</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.date }}</td>
+                            <td>{{ transaction.amount }}</td>
+                            <td>{{ transaction.comment }}</td>
+                            {% if transaction.category == None %}
+                                <td>Usunięto</td>
+                            {% else %}
+                                <td>{{ transaction.category }}</td>
+                            {% endif %}
+                            {% if transaction.account == None %}
+                                <td>Usunięto</td>
+                            {% else %}
+                                <td>{{ transaction.account }}</td>
+                            {% endif %}
+                            <td><a href="/transaction/edit/{{ transaction.id }}/">Edytuj</a></td>
+                            <td><a href="/transaction/delete/{{ transaction.id }}/">Usuń</a></td>
+                        </tr>
+                    {% endfor %}
+                    <tfoot>
+                    <tr>
+                        <th>Data</th>
+                        <th>Kwota</th>
+                        <th>Komentarz</th>
+                        <th>Kategoria</th>
+                        <th>Konto</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+django==3.0.5
+beautifulscraper==1.1.1
+selenium==3.141.0
+urllib3==1.25.8
+pytz==2019.3
+asgiref==3.2.7
+setuptools==40.8.0
+sqlparse==0.3.1

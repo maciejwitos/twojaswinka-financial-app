@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Wszystkie Kategorie</h3>
+
+            </div>
+            <div>
+                <a href="{% url "add-category" %}">
+                    <button type="button" class="btn btn-block btn-success btn-sm">Dodaj kategorie</button>
+                </a>
+            </div>
+            <div class="card-body">
+                <table id="example2" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Wydatki</th>
+                        <th>Budżet</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.name }}</td>
+                            <td>{{ category.spending }}</td>
+                            <td></td>
+                            <td><a href="/category/details/{{ category.id }}/">Szczegóły</a></td>
+                            <td><a href="/category/delete/{{ category.id }}/">Usuń</a></td>
+                        </tr>
+                    {% endfor %}
+                    <tfoot>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Wydatki</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

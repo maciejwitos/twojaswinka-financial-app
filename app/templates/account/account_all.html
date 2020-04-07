@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Wszystkie Konta</h3>
+            </div>
+            <div>
+                <a href="{% url "add-account" %}"><button type="button" class="btn btn-block btn-success btn-sm">Dodaj konto</button></a>
+            </div>
+            <div class="card-body">
+                <table id="example2" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Bank</th>
+                        <th>Saldo</th>
+                        <th>Waluta</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for account in accounts %}
+                        <tr>
+                            <td>{{ account.name }}</td>
+                            <td>{{ account.bank }}</td>
+                            <td>{{ account.balance }}</td>
+                            <td>{{ account.currency }}</td>
+                            <td><a href="/account/details/{{ account.id }}/">Szczegóły</a></td>
+                            <td><a href="/account/delete/{{ account.id }}/">Usuń</a></td>
+                        </tr>
+                    {% endfor %}
+                    <tfoot>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Bank</th>
+                        <th>Saldo</th>
+                        <th>Waluta</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

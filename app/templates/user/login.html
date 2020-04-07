@@ -1,0 +1,50 @@
+{% extends 'user/user_base.html' %}
+{% load static %}
+{% block user_body %}
+    <p class="login-box-msg">Zaloguj się i śledź swoje finanse</p>
+    <form action="{% url "login" %}" method="post">
+        {% csrf_token %}
+        {{ form.username.label }}
+        <div class="input-group mb-3">
+            {{ form.username }}
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+            {{ form.username.errors }}
+        </div>
+        {{ form.password.label }}
+        <div class="input-group mb-3">
+            {{ form.password }}
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+            </div>
+            {{ form.password.errors }}
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="icheck-primary">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">
+                        Zapamiętaj mnie
+                    </label>
+                </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Zaloguj</button>
+                <input type="hidden" name="next" value="/dashboard/">
+            </div>
+            <!-- /.col -->
+        </div>
+    </form>
+    <p class="mb-1">
+        <a href="{% url "password-reset" %}">Zapomniałeś hasła?</a>
+    </p>
+    <p class="mb-0">
+        <a href="{% url "register-form" %}" class="text-center">Utwórz konto!</a>
+    </p>
+{% endblock %}
