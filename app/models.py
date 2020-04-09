@@ -28,7 +28,7 @@ class Budget(models.Model):
     date = models.DateField()
 
     def __str__(self):
-        return self.category.name + " " + str(self.start_date)
+        return self.category.name + " " + str(self.date)
 
 
 class Account(models.Model):
