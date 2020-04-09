@@ -8,9 +8,9 @@ class AddTransactionForm(forms.ModelForm):
 
     def __init__(self, user, *args, **kwargs):
         super(AddTransactionForm, self).__init__(*args, **kwargs)
-        self.fields['comment'].widget=forms.TextInput({'class':'form-control'})
+        self.fields['comment'].widget=forms.TextInput({'class':'form-control', 'placeholder': 'np. Netflix'})
         self.fields['comment'].label='Komentarz'
-        self.fields['amount'].widget=forms.NumberInput({'class':'form-control'})
+        self.fields['amount'].widget=forms.NumberInput({'class':'form-control', 'step': '0.01', 'placeholder': 'np. 12.99'})
         self.fields['amount'].label='Kwota'
         self.fields['date'].widget=forms.SelectDateWidget({'class':"form-control"})
         self.fields['date'].label='Data'
