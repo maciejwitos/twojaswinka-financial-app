@@ -2,7 +2,6 @@ from app.views import *
 
 
 class AddBudget(LoginRequiredMixin, View):
-
     login_url = '/login/'
 
     def get(self, request):
@@ -11,30 +10,30 @@ class AddBudget(LoginRequiredMixin, View):
 
     def post(self, request):
         form = AddBudgetForm(request.user, request.POST, initial={'user': request.user})
-        if form.is_valid():
+
+        try:
             Budget.objects.create(user=request.user,
-                                  category=form.cleaned_data['category'],
-                                  budget=form.cleaned_data['budget'],
-                                  date=form.cleaned_data['date'])
+                                  category=Category.objects.get(id=form.data.get('category')),
+                                  budget=form.data.get('budget'),
+                                  date=str(form.data.get('date')) + '-01')
             return redirect('dashboard')
-        else:
+        except:
             return redirect('404')
 
 
 class ViewBudgets(LoginRequiredMixin, View):
-
     login_url = '/login/'
 
     def get(self, request):
         budgets = Budget.objects.filter(
-                user=request.user).filter(
-                date__month=date.today().month).filter(
-                date__year=date.today().year)
+            user=request.user).filter(
+            date__month=date.today().month).filter(
+            date__year=date.today().year)
         return render(request, 'budget/budget_all.html', {'budgets': budgets})
 
     def post(self, request):
         date_search = request.POST.get('date_search')
-        date_search = datetime.datetime.strptime(date_search, '%Y-%m-%d')
+        date_search = datetime.datetime.strptime(date_search, '%Y-%m')
         budgets = Budget.objects.filter(
             user=request.user).filter(
             date__month=date_search.month).filter(
@@ -53,7 +52,6 @@ class DetailsBudget(LoginRequiredMixin, View):
 
 
 class EditBudget(LoginRequiredMixin, UpdateView):
-
     login_url = '/login/'
     model = Budget
     fields = ('category', 'budget', 'date', 'expenses')
@@ -66,7 +64,6 @@ class EditBudget(LoginRequiredMixin, UpdateView):
 
 
 class DeleteBudget(LoginRequiredMixin, DeleteView):
-
     login_url = '/login/'
 
     model = Budget
