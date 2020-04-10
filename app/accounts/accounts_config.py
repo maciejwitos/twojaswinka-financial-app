@@ -1,7 +1,6 @@
 from app.views import *
 
 
-# Dodawanie nowego konta
 class AddAccount(LoginRequiredMixin, View):
     login_url = '/login/'
 
@@ -23,7 +22,6 @@ class AddAccount(LoginRequiredMixin, View):
         return redirect('all-account')
 
 
-# Wyświetlanie wszystkich kont
 class ReadAccounts(LoginRequiredMixin, View):
     login_url = '/login/'
 
@@ -32,7 +30,6 @@ class ReadAccounts(LoginRequiredMixin, View):
         return render(request, 'account/account_all.html', {'accounts': accounts})
 
 
-# Edycja konta
 class EditAccount(LoginRequiredMixin, UpdateView):
 
     login_url = '/login/'
@@ -58,7 +55,6 @@ class DetailsAccount(LoginRequiredMixin, View):
                                                                 'transactions': transactions})
 
 
-# Usuwanie konta
 class DeleteAccount(LoginRequiredMixin, DeleteView):
     login_url = '/login/'
 
