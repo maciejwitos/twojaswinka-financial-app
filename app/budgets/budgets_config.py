@@ -33,7 +33,10 @@ class ViewBudgets(LoginRequiredMixin, View):
 
     def post(self, request):
         date_search = request.POST.get('date_search')
-        date_search = datetime.datetime.strptime(date_search, '%Y-%m')
+        try:
+            date_search = datetime.datetime.strptime(date_search, '%Y-%m')
+        except ValueError:
+            date_search = date.today()
         budgets = Budget.objects.filter(
             user=request.user).filter(
             date__month=date_search.month).filter(
