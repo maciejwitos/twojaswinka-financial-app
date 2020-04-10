@@ -4,7 +4,7 @@ from app.forms import *
 class AddTransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ('date', 'amount', 'comment', 'category', 'account', 'user', )
+        fields = ('date', 'amount', 'comment', 'category', 'account', 'user', 'is_income')
 
     def __init__(self, user, *args, **kwargs):
         super(AddTransactionForm, self).__init__(*args, **kwargs)
@@ -20,4 +20,6 @@ class AddTransactionForm(forms.ModelForm):
         self.fields['account'].widget = forms.Select({'class': 'form-control select2'})
         self.fields['account'].queryset=Account.objects.filter(user=user)
         self.fields['account'].label = 'Konto'
+        self.fields['is_income'].label = 'Wpływy'
+        self.fields['is_income'].widget = forms.CheckboxInput()
         self.fields['user'].widget=forms.HiddenInput()

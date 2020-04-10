@@ -51,7 +51,7 @@ class DetailsAccount(LoginRequiredMixin, View):
 
     def get(self, request, pk):
         account = Account.objects.get(id=pk)
-        transactions = Transaction.objects.filter(account=account)
+        transactions = Transaction.objects.filter(account=account).order_by('-date')
         if not request.user.pk == account.user.pk:
             return redirect('/404/')
         return render(request, 'account/account_details.html', {'account': account,

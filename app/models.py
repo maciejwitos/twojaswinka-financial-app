@@ -49,6 +49,7 @@ class Transaction(models.Model):
     comment = models.CharField(max_length=36)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     account = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
+    is_income = models.BooleanField(default=False)
 
     def __str__(self):
         return self.comment
