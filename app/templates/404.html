@@ -1,17 +1,8 @@
-{% extends 'base.html' %}
-{% block content %}
-    <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h1>404 Error Page</h1>
-          </div>
-          <div class="col-sm-6">
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+{% extends 'user/user_base.html' %}
+{% load static %}
+{% block user_body %}
+    <div style="text-align: center">
+    <h1>404 Error Page</h1>
+    <a href="{% url "dashboard" %}">Wróć do strony głównej</a>
+    </div>
 {% endblock %}
