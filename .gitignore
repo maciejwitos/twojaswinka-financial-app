@@ -6,7 +6,7 @@
 __pycache__
 db.sqlite3
 media
-TwojaSwinka/local_settings.py
+TwojaSwinka/local_config.py
 
 # Backup files #
 *.bak
