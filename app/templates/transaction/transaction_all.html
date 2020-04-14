@@ -21,6 +21,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% if transactions.count == 0 %}
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            Nie masz żadnych dodanych transakcji. Kliknij przycis "Nowa transakcja", aby utworzyć.
+                        </td>
+                    </tr>
+                    {% endif %}
                     {% for transaction in transactions %}
                         <tr>
                             <td>{{ transaction.date }}</td>

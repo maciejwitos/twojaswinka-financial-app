@@ -25,8 +25,10 @@
                                     <button class="btn btn-block btn-success btn-s">Dodaj pierwszą kategorię</button>
                                 </a></td>
                                 <tr>
-                                    <td colspan="4" class="text-center">Następnie zaplanuj wydatki dla każdej
-                                        kategorii
+                                    <td colspan="4" class="text-center">
+                                        Utwórz pierwszą kategorię aby móc dodawać transakcje.
+                                        Możesz też zaplanować miesięczny budżet dla każdej kategorii,
+                                        który będzie wyświetlać się w tej sekcji.
                                     </td>
                                 </tr>
                             {% endif %}
@@ -35,7 +37,12 @@
                                     <button class="btn btn-block btn-success btn-s">Dodaj pierwszy budżet</button>
                                 </a></td>
                                 <tr>
-                                    <td colspan="4" class="text-center">Tu znajdziesz podsumowanie twojego budżetu</td>
+                                    <td colspan="4" class="text-center">
+                                        Tu będą wyświetlać się wszystkie twoje
+                                        kategorię z zaplanowanym budżetem na bierzący
+                                        miesiąc. Musisz utworzyć kategorię, aby móc
+                                        zaplanować dla niej budżet.
+                                    </td>
                                 </tr>
                             {% endif %}
                             {% for budget in budgets %}
@@ -79,7 +86,11 @@
                                     <button class="btn btn-block btn-success btn-s">Dodaj pierwsze konto</button>
                                 </a></td>
                                 <tr>
-                                    <td colspan="5" class="text-center">Tu będą twoje konta</td>
+                                    <td colspan="5" class="text-center">
+                                        W tej sekcji znajdziesz wszystkie twoje konta.
+                                        Utwórz swoje pierwsze konto abyś mógł/mogła zacząć
+                                        dodawać transakcje.
+                                    </td>
                                 </tr>
                             {% endif %}
                             {% for account in accounts %}
@@ -169,7 +180,11 @@
                                 <tbody id="transaction-table">
                                 {% if transactions.count == 0 %}
                                     <tr>
-                                        <td colspan="7" class="text-center">Tu znajdziesz swoje transakcje</td>
+                                        <td colspan="7" class="text-center">
+                                            W tej sekcji znajdziesz wszystkie transakcje dokonane
+                                            w bierzącym miesiącu. Możesz użyć wyszukiwarki aby
+                                            znaleźć konkretną transakcję wpisując jej opis lub kwotę.
+                                        </td>
                                     </tr>
                                 {% endif %}
                                 {% for transaction in transactions %}

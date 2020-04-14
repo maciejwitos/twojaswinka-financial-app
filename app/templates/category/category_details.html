@@ -37,6 +37,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% if transactions.count == 0 %}
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                Nie masz żadnych transakcji przypisanych do tej kategorii.
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% for transaction in transactions %}
                         <tr>
                             <td>{{ transaction.date }}</td>

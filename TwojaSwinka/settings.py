@@ -25,7 +25,7 @@ SECRET_KEY = 'jck=#_*hl%n^scdw26m%8q1hi4f@7m_)a16!tjsziyx6niykuo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
+git
 ALLOWED_HOSTS = ['*']
 
 ADMINS = [('mac.witos.admin', 'twoja.swinka.pl@gmail.com')]
@@ -70,22 +70,25 @@ TEMPLATES = [
     },
 ]
 
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'twojaswinkadb',
+        'USER': 'maciejwitos',
+        'PASSWORD': 'PostgreSQL2020',
+        'HOST': 'twojaswinkadb.cv9ikkunke92.eu-central-1.rds.amazonaws.com',
+        'PORT': '5432',
+    }
+}
+
 WSGI_APPLICATION = 'TwojaSwinka.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'twojaswinkadatabase',
-        'USER': 'maciejwitos',
-        'PASSWORD': 'PostgreSQL2020',
-        'HOST': 'twojaswinkadatabase.cv9ikkunke92.eu-central-1.rds.amazonaws.com',
-        'PORT': '5432',
-    }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -115,7 +118,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

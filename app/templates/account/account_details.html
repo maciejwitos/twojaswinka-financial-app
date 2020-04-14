@@ -3,31 +3,31 @@
 {% block content %}
     <div class="col-12">
         <div class="card">
-        <div class="card-header table-responsive-xl">
-            <table class="table table-sm">
-                <tr>
-                    <th>Nazwa</th>
-                    <th>Bank</th>
-                    <th>Stan konta</th>
-                    <th>Waluta</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>{{ account.name }}</td>
-                    <td>{{ account.bank }}</td>
-                    <td>{{ account.balance }}</td>
-                    <td>{{ account.currency }}</td>
-                    <td><a href="/account/edit/{{ account.id }}/">Edytuj</a></td>
-                    <td><a href="/account/delete/{{ account.id }}/">Usuń</a></td>
-                </tr>
+            <div class="card-header table-responsive-xl">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Bank</th>
+                        <th>Stan konta</th>
+                        <th>Waluta</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>{{ account.name }}</td>
+                        <td>{{ account.bank }}</td>
+                        <td>{{ account.balance }}</td>
+                        <td>{{ account.currency }}</td>
+                        <td><a href="/account/edit/{{ account.id }}/">Edytuj</a></td>
+                        <td><a href="/account/delete/{{ account.id }}/">Usuń</a></td>
+                    </tr>
 
-            </table>
-        </div>
+                </table>
+            </div>
 
 
             <!-- /.card-header -->
-         <hr>
+            <hr>
             <div class="card-body table-responsive-xl">
 
                 <tr>
@@ -46,6 +46,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% if transactions.count == 0 %}
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                Nie masz żadnych transakcji przypisanych do tego konta.
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% for transaction in transactions %}
                         <tr>
                             <td>{{ transaction.date }}</td>

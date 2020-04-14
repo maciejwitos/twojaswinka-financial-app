@@ -14,6 +14,6 @@ class AddBudgetForm(forms.ModelForm):
         self.fields['category'].label = 'Kategoria'
         self.fields['date'].widget = forms.TextInput({'type': 'month', 'class': "form-control"})
         self.fields['date'].label = 'Data'
-        self.fields['budget'].widget = forms.NumberInput({'class': 'form-control', 'step': '0.01'})
+        self.fields['budget'].widget = forms.NumberInput({'class': 'form-control', 'step': '0.01', 'placeholder': 'Wpisz, jaką kwotę planujesz przeznaczyć na tę kategorię'})
         self.fields['budget'].label = 'Budżet'
         self.fields['expenses'].widget = forms.HiddenInput()

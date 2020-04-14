@@ -24,7 +24,7 @@ class GetCurrencies:
                 options.arguments.append('headless')
 
                 # set browser
-                driver = webdriver.Chrome("/home/ubuntu/TwojaSwinka/app/currency/scraper/chromedriver", options=options)
+                driver = webdriver.Chrome("/home/maciej/Projekty/TwojaSwinka/app/currency/scraper/chromedriver", options=options)
 
                 # go to website
                 driver.get('https://www.mybank.pl/')

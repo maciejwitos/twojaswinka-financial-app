@@ -37,6 +37,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% if budgets.count == 0 %}
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                Nie masz żadnych zaplanowanych budżetów na te miesiąc. Kliknij przycis "Dodaj budżet", aby utworzyć.
+                            </td>
+                        </tr>
+                    {% endif %}
                     {% for budget in budgets %}
                         <tr>
                             <td>{{ budget.category.name }}</td>
