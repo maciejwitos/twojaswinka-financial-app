@@ -34,7 +34,7 @@ class EditAccount(LoginRequiredMixin, UpdateView):
 
     login_url = '/login/'
     model = Account
-    fields = ('name', 'bank', 'currency', 'balance', 'user',)
+    fields = ('name', 'bank', 'currency', 'balance', )
     success_url = '/account/all/'
 
     def get(self, request, *args, **kwargs):

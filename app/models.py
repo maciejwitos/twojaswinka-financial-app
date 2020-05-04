@@ -34,7 +34,7 @@ class Budget(models.Model):
 class Account(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=24)
-    bank = models.CharField(max_length=12)
+    bank = models.CharField(max_length=24)
     balance = models.DecimalField(default=0, decimal_places=2, max_digits=10)
     currency = models.ForeignKey(Currency, on_delete=models.SET_NULL, null=True)
 

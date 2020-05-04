@@ -38,7 +38,7 @@ class Dashboard(LoginRequiredMixin, View):
     login_url = '/login/'
 
     def get(self, request):
-        GetCurrencies.scrap_currencies(current_day=date.today())
+        # GetCurrencies.scrap_currencies(current_day=date.today())
         categories = Category.objects.filter(user=request.user).order_by('-spending')
         currencies = Currency.objects.all()
         transactions = Transaction.objects.filter(
