@@ -88,7 +88,7 @@ class Dashboard(LoginRequiredMixin, View):
                                                   'budgets': budgets,
                                                   'transactions': transactions,
                                                   'accounts': accounts,
-                                                  'my_wealth': float(my_wealth)})
+                                                  'my_wealth': round(my_wealth, 2)})
 
 
 class View404(View):

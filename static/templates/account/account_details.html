@@ -56,7 +56,11 @@
                     {% for transaction in transactions %}
                         <tr>
                             <td>{{ transaction.date }}</td>
-                            <td>{{ transaction.amount }}</td>
+                        {% if transaction.is_income == True %}
+                            <td style="color: green">{{ transaction.amount }}</td>
+                        {% else %}
+                        <td>{{ transaction.amount }}</td>
+                        {% endif %}
                             <td>{{ transaction.comment }}</td>
                             {% if transaction.category == None %}
                                 <td>Usunięto</td>

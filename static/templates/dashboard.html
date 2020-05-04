@@ -200,7 +200,11 @@
                                     <tr>
                                         <td></td>
                                         <td>{{ transaction.date }}</td>
+                                        {% if transaction.is_income == True %}
+                                        <td style="color:green;">{{ transaction.amount }} {{ transaction.account.currency }}</td>
+                                        {% else %}
                                         <td>{{ transaction.amount }} {{ transaction.account.currency }}</td>
+                                        {% endif %}
                                         <td>{{ transaction.comment }}</td>
                                         <td>{{ transaction.category }}</td>
                                         <td>{{ transaction.account }}</td>
