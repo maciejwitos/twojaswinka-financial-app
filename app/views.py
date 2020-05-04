@@ -1,5 +1,4 @@
 from django.db.models import Q
-from app.currency.scraper.currency_scraper import *
 from django.views.generic import UpdateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordResetView
@@ -13,18 +12,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic.edit import DeletionMixin
 from django.http import HttpResponse
 from app.accounts.accounts_forms import *
-import datetime
+from datetime import date
 from app.budgets.budgets_form import *
 from app.category.category_forms import *
 from app.currency.currency_form import *
 from app.transactions.transaction_form import AddTransactionForm
 from decimal import Decimal
-from app.user.user_config import *
-from app.budgets.budgets_config import *
 from app.category.category_config import *
 from app.accounts.accounts_config import *
-from app.transactions.transactins_config import *
 from app.currency.currency_config import *
+from app.budgets.budgets_config import *
+from app.user.user_config import *
+from app.transactions.transactins_config import *
+from scraper.update_currencies_values import read_values
 
 
 class Dashboard(LoginRequiredMixin, View):
@@ -32,13 +32,19 @@ class Dashboard(LoginRequiredMixin, View):
     Main View Dashboard. When run it's:
     - updating currencies
     - showing all sections for user: categories, currencies, transactions and accounts
-    - has search for transactions
+    - has search for transactions admin/app/currency/
     - showing total wealth of user
     """
     login_url = '/login/'
 
     def get(self, request):
-        # GetCurrencies.scrap_currencies(current_day=date.today())
+
+        last_update = LastUpdateDate.objects.get(id=1)
+        if not last_update.last_update == date.today():
+            read_values()
+            last_update.last_update = date.today()
+            last_update.save()
+
         categories = Category.objects.filter(user=request.user).order_by('-spending')
         currencies = Currency.objects.all()
         transactions = Transaction.objects.filter(
