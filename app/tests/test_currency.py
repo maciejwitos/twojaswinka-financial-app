@@ -42,14 +42,14 @@ class UrlTest(TestCase):
 
     def test_currency_edit_url(self):
         currency = self.create_fake_currency()
-        request = self.factory.post(f'/transaction/edit/{currency.pk}/')
+        request = self.factory.post(f'/transaction/edit/{currency.pk}')
         request.user = self.user
         response = EditCurrency.as_view()(request)
         self.assertEqual(response.status_code, 200)
 
     def test_currency_delete_url(self):
         currency = self.create_fake_currency()
-        request = self.factory.get('/currency/delete/1')
+        request = self.factory.get(f'/currency/delete/{currency.pk}')
         request.user = self.user
         response = DeleteCurrency.as_view()(request)
         self.assertEqual(response.status_code, 200)
