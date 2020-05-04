@@ -45,7 +45,6 @@ class Dashboard(LoginRequiredMixin, View):
             last_update.last_update = date.today()
             last_update.save()
 
-        categories = Category.objects.filter(user=request.user).order_by('-spending')
         currencies = Currency.objects.all()
         transactions = Transaction.objects.filter(
             user=request.user).filter(
@@ -55,14 +54,13 @@ class Dashboard(LoginRequiredMixin, View):
         budgets = Budget.objects.filter(
             user=request.user).filter(
             date__month=date.today().month).filter(
-            date__year=date.today().year)
+            date__year=date.today().year).order_by('-expenses')
         my_wealth = 0
         for account in accounts:
             balance = account.balance
             balance_in_pln = balance * account.currency.in_pln
             my_wealth += balance_in_pln
-        return render(request, 'dashboard.html', {'categories': categories,
-                                                  'currencies': currencies,
+        return render(request, 'dashboard.html', {'currencies': currencies,
                                                   'transactions': transactions,
                                                   'accounts': accounts,
                                                   'budgets': budgets,
@@ -70,7 +68,6 @@ class Dashboard(LoginRequiredMixin, View):
 
     def post(self, request):
         data = request.POST.get('search_transaction')
-        categories = Category.objects.filter(user=request.user).order_by('-spending')
         currencies = Currency.objects.all()
         # search for transaction
         transactions = Transaction.objects.filter(user=request.user).filter(
@@ -80,15 +77,14 @@ class Dashboard(LoginRequiredMixin, View):
         budgets = Budget.objects.filter(
             user=request.user).filter(
             date__month=date.today().month).filter(
-            date__year=date.today().year)
+            date__year=date.today().year).order_by('-expenses')
 
         my_wealth = 0
         for account in accounts:
             balance = account.balance
             balance_in_pln = balance * account.currency.in_pln
             my_wealth += balance_in_pln
-        return render(request, 'dashboard.html', {'categories': categories,
-                                                  'currencies': currencies,
+        return render(request, 'dashboard.html', {'currencies': currencies,
                                                   'budgets': budgets,
                                                   'transactions': transactions,
                                                   'accounts': accounts,
