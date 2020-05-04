@@ -6,4 +6,3 @@ from app.accounts.accounts_config import *
 from app.currency.currency_config import *
 from app.transactions.transactins_config import *
 from app.tests.utils import *
-

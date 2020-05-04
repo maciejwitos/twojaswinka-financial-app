@@ -33,7 +33,7 @@
                     {% for category in categories %}
                         <tr>
                             <td>{{ category.name }}</td>
-                            <td>{{ category.spending }}</td>
+                            <td>{{ category.spending }} zł</td>
                             <td><a href="/category/details/{{ category.id }}/">Szczegóły</a></td>
                             <td><a href="/category/delete/{{ category.id }}/">Usuń</a></td>
                         </tr>

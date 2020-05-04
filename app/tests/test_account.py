@@ -1,5 +1,5 @@
 from app.tests.tests import *
-from app.currency.tests.test_currency import TestCase
+from app.tests.test_currency import TestCase
 
 
 class UrlTest(TestCase):
@@ -42,7 +42,7 @@ class UrlTest(TestCase):
 
     def test_account_edit_url(self):
         account = self.create_fake_account()
-        request = self.factory.post(f'/category/edit/{account.pk}/')
+        request = self.factory.post(f'/category/edit/{account.pk}')
         request.user = self.user
         response = EditAccount.as_view()(request)
         self.assertEqual(response.status_code, 200)

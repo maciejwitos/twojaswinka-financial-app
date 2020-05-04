@@ -37,7 +37,7 @@ class UrlTest(TestCase):
 
     def test_category_edit_url(self):
         category = self.create_fake_category()
-        request = self.factory.post(f'/category/edit/{category.pk}/')
+        request = self.factory.post(f'/category/edit/{category.pk}')
         request.user = self.user
         response = EditCategory.as_view()(request)
         self.assertEqual(response.status_code, 200)
@@ -51,7 +51,7 @@ class UrlTest(TestCase):
 
     def test_category_delete_url(self):
         category = create_fake_category()
-        request = self.factory.post(f'/category/delete/{category.pk}/')
+        request = self.factory.post(f'/category/delete/{category.pk}')
         request.user = self.user
         response = DeleteCategory.as_view()(request)
         self.assertEqual(response.status_code, 200)

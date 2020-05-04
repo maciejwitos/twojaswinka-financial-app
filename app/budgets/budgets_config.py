@@ -29,7 +29,7 @@ class ViewBudgets(LoginRequiredMixin, View):
         budgets = Budget.objects.filter(
             user=request.user).filter(
             date__month=date.today().month).filter(
-            date__year=date.today().year)
+            date__year=date.today().year).order_by('-expenses')
         return render(request, 'budget/budget_all.html', {'budgets': budgets})
 
     def post(self, request):
@@ -41,7 +41,7 @@ class ViewBudgets(LoginRequiredMixin, View):
         budgets = Budget.objects.filter(
             user=request.user).filter(
             date__month=date_search.month).filter(
-            date__year=date_search.year)
+            date__year=date_search.year).order_by('-expenses')
         return render(request, 'budget/budget_all.html', {'budgets': budgets})
 
 

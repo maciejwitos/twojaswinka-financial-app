@@ -47,14 +47,14 @@ class UrlTest(TestCase):
 
     def test_transaction_edit_url(self):
         transaction = self.create_fake_transaction()
-        request = self.factory.post(f'/transaction/edit/{transaction.pk}/')
+        request = self.factory.post('/transaction/edit')
         request.user = self.user
         response = EditTransaction.as_view()(request)
         self.assertEqual(response.status_code, 200)
 
     def test_transaction_delete_url(self):
         transaction = self.create_fake_transaction()
-        request = self.factory.post(f'/transaction/delete/{transaction.pk}/')
+        request = self.factory.post('/transaction/delete')
         request.user = self.user
         response = DeleteTransaction.as_view()(request)
         self.assertEqual(response.status_code, 200)

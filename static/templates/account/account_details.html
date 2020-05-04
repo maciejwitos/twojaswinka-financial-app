@@ -7,20 +7,29 @@
                 <table class="table table-sm">
                     <tr>
                         <th>Nazwa</th>
-                        <th>Wydatki</th>
+                        <th>Bank</th>
+                        <th>Stan konta</th>
+                        <th>Waluta</th>
                         <th></th>
                         <th></th>
                     </tr>
                     <tr>
-                        <td>{{ category.name }}</td>
-                        <td>{{ category.spending }}</td>
-                        <td><a href="/category/edit/{{ category.id }}/">Edytuj</a></td>
-                        <td><a href="/category/delete/{{ category.id }}/">Usuń</a></td>
+                        <td>{{ account.name }}</td>
+                        <td>{{ account.bank }}</td>
+                        <td>{{ account.balance }}</td>
+                        <td>{{ account.currency }}</td>
+                        <td><a href="/account/edit/{{ account.id }}/">Edytuj</a></td>
+                        <td><a href="/account/delete/{{ account.id }}/">Usuń</a></td>
                     </tr>
+
                 </table>
             </div>
+
+
+            <!-- /.card-header -->
             <hr>
-            <div class="card-body">
+            <div class="card-body table-responsive-xl">
+
                 <tr>
                     <h5>Wszystkie transakcje</h5>
                 </tr>
@@ -40,14 +49,18 @@
                     {% if transactions.count == 0 %}
                         <tr>
                             <td colspan="7" class="text-center">
-                                Nie masz żadnych transakcji przypisanych do tej kategorii.
+                                Nie masz żadnych transakcji przypisanych do tego konta.
                             </td>
                         </tr>
                     {% endif %}
                     {% for transaction in transactions %}
                         <tr>
                             <td>{{ transaction.date }}</td>
-                            <td>{{ transaction.amount }} {{ transaction.account.currency }}</td>
+                        {% if transaction.is_income == True %}
+                            <td style="color: green">{{ transaction.amount }}</td>
+                        {% else %}
+                        <td>{{ transaction.amount }}</td>
+                        {% endif %}
                             <td>{{ transaction.comment }}</td>
                             {% if transaction.category == None %}
                                 <td>Usunięto</td>
@@ -76,8 +89,7 @@
                     </tfoot>
                 </table>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
+        <!-- /.card-body -->
     </div>
 {% endblock %}
