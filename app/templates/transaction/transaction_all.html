@@ -31,7 +31,7 @@
                     {% for transaction in transactions %}
                         <tr>
                             <td>{{ transaction.date }}</td>
-                            <td>{{ transaction.amount }}</td>
+                            <td>{{ transaction.amount }} {{ transaction.account.currency }}</td>
                             <td>{{ transaction.comment }}</td>
                             {% if transaction.category == None %}
                                 <td>Usunięto</td>

@@ -66,7 +66,7 @@ class Dashboard(LoginRequiredMixin, View):
                                                   'transactions': transactions,
                                                   'accounts': accounts,
                                                   'budgets': budgets,
-                                                  'my_wealth': float(my_wealth)})
+                                                  'my_wealth': round(my_wealth, 2)})
 
     def post(self, request):
         data = request.POST.get('search_transaction')

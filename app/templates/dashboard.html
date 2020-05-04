@@ -7,9 +7,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Twoje kategorie w tym miesiącu: </h3>
                     </div>
-
-
-                    <div class="card-body table-responsive p-0" style="height: 584px;">
+                    <div class="card-body table-responsive p-0" style="height: 400px;">
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -61,9 +59,23 @@
                         </table>
                     </div>
                 </div>
-
-
-            </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Twój majątek</h3>
+                        </div>
+                        <div class="card-body" style="height: 125px;">
+                            <div class="align-content-center p-0">
+                                {% if my_wealth < 0 %}
+                                    <p class="text-center" style="font-size: 40px; color: red"><strong>{{ my_wealth }}
+                                        zł</strong></p>
+                                {% else %}
+                                    <p class="text-center" style="font-size: 40px; color: green">
+                                        <strong>{{ my_wealth }} zł</strong></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             <div class="col-md-6">
                 <div class="card">
@@ -125,22 +137,19 @@
                             {% for currency in currencies %}
                                 <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td>{{ currency.name }}</td>
-                                    <td>{{ currency.in_pln }}</td>
+                                    {% if currency.name != "PLN" %}
+                                        <td></td>
+                                        <td>{{ currency.name }}</td>
+                                        <td>{{ currency.in_pln }} zł</td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-
-
             </div>
-
         </div>
-
     </div>
 
     <div class="col-12">
@@ -191,7 +200,7 @@
                                     <tr>
                                         <td></td>
                                         <td>{{ transaction.date }}</td>
-                                        <td>{{ transaction.amount }}</td>
+                                        <td>{{ transaction.amount }} {{ transaction.account.currency }}</td>
                                         <td>{{ transaction.comment }}</td>
                                         <td>{{ transaction.category }}</td>
                                         <td>{{ transaction.account }}</td>

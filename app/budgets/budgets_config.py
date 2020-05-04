@@ -1,4 +1,5 @@
 from app.views import *
+import datetime
 
 
 class AddBudget(LoginRequiredMixin, View):
@@ -16,7 +17,7 @@ class AddBudget(LoginRequiredMixin, View):
                                   category=Category.objects.get(id=form.data.get('category')),
                                   budget=form.data.get('budget'),
                                   date=str(form.data.get('date')) + '-01')
-            return redirect('dashboard')
+            return redirect('all-budget')
         except:
             return redirect('404')
 
