@@ -33,7 +33,7 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='user/password_reset_complete.html'),
          name='password-reset-complete'),
     path('details/', UserDetails.as_view(), name='user-details'),
-    path('user/delete/<pk>/', DeleteUser.as_view(template_name='confirm_delete.html', success_url='/category/all/'),
+    path('user/delete/<pk>/', DeleteUser.as_view(template_name='confirm_delete.html', success_url='/login/'),
          name='user-delete'),
 
     path('category/add/', AddCategory.as_view(), name='add-category'),

@@ -128,3 +128,64 @@ def test_delete_transaction():
     elements_in_database_before_deletion = Transaction.objects.count()
     transaction.delete()
     assert Transaction.objects.count() == elements_in_database_before_deletion - 1
+
+
+#################   TESTS FOR EDIT MODELS   ####################
+@pytest.mark.django_db
+def test_edit_user():
+    user = fake_user()
+    old_user_name = user.username
+    user.username = 'new_name'
+    assert user.username != old_user_name
+    assert user.username == 'new_name'
+
+
+@pytest.mark.django_db
+def test_edit_currency():
+    currency = fake_currency()
+    old_currency_name = currency.name
+    currency.name = 'new_name'
+    assert currency.name != old_currency_name
+    assert currency.name == 'new_name'
+
+
+@pytest.mark.django_db
+def test_edit_category():
+    category = fake_category()
+    old_category_name = category.name
+    category.name = 'new_name'
+    assert category.name != old_category_name
+    assert category.name == 'new_name'
+
+
+@pytest.mark.django_db
+def test_edit_account():
+    account = fake_account()
+    old_account_name = account.name
+    account.name = 'new_name'
+    assert account.name != old_account_name
+    assert account.name == 'new_name'
+
+
+@pytest.mark.django_db
+def test_edit_budget():
+    budget = fake_budget()
+    old_budget_budget = budget.budget
+    budget.budget = 888
+    assert budget.budget != old_budget_budget
+    assert budget.budget == 888
+
+
+@pytest.mark.django_db
+def test_edit_transaction():
+    transaction = fake_transaction()
+    old_transaction_name = transaction.comment
+    transaction.comment = 'new_comment'
+    assert transaction.comment != old_transaction_name
+    assert transaction.comment == 'new_comment'
+
+
+
+
+
+

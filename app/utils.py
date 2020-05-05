@@ -27,7 +27,7 @@ def fake_category():
 
 @pytest.mark.django_db
 def fake_account():
-    account = Account.objects.create(bank=fake.company(),
+    account = Account.objects.create(bank=fake.first_name_female(),
                                      name=fake.first_name_male(),
                                      balance=999,
                                      currency=fake_currency(),
