@@ -9,11 +9,6 @@ from app.views import Dashboard
 client = Client()
 
 
-def login_user():
-    user = fake_user()
-    return client.login(username=user.username, password=user.password)
-
-
 def test_view_dashboard_get():
     response = client.get('/dashboard/')
     assert response.status_code == 302
@@ -206,3 +201,157 @@ def test_view_currency_edit_post():
     currency = fake_currency()
     response = client.post(f'/currency/delete/{currency.pk}/')
     assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_account_add_get():
+    response = client.get('/account/add/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_account_add_post():
+    response = client.post('/account/add/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_account_all_get():
+    response = client.get('/account/all/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_account_details_get():
+    account = fake_account()
+    response = client.get(f'/account/details/{account.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_account_edit_get():
+    account = fake_account()
+    response = client.get(f'/account/edit/{account.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_account_edit_post():
+    account = fake_account()
+    response = client.post(f'/account/edit/{account.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_account_delete_get():
+    account = fake_account()
+    response = client.get(f'/account/delete/{account.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_account_delete_post():
+    account = fake_account()
+    response = client.post(f'/account/delete/{account.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_budget_add_get():
+    response = client.get('/budget/add/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_budget_add_post():
+    response = client.post('/budget/add/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_budget_all_get():
+    response = client.get('/budget/all/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_budget_details_get():
+    budget = fake_budget()
+    response = client.get(f'/budget/details/{budget.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_budget_edit_get():
+    budget = fake_budget()
+    response = client.get(f'/budget/edit/{budget.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_budget_edit_post():
+    budget = fake_budget()
+    response = client.post(f'/budget/edit/{budget.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_budget_delete_get():
+    budget = fake_budget()
+    response = client.get(f'/budget/delete/{budget.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_budget_delete_post():
+    budget = fake_budget()
+    response = client.post(f'/budget/delete/{budget.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_transaction_add_get():
+    response = client.get('/transaction/add/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_transaction_add_post():
+    response = client.post('/transaction/add/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_transaction_all_get():
+    response = client.get('/transaction/all/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_transaction_edit_get():
+    transaction = fake_transaction()
+    response = client.get(f'/transaction/edit/{transaction.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_transaction_edit_post():
+    transaction = fake_transaction()
+    response = client.post(f'/transaction/edit/{transaction.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_transaction_delete_get():
+    transaction = fake_transaction()
+    response = client.get(f'/transaction/delete/{transaction.pk}/')
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_view_transaction_delete_post():
+    transaction = fake_transaction()
+    response = client.post(f'/transaction/delete/{transaction.pk}/')
+    assert response.status_code == 302
+
+
