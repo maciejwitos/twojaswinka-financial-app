@@ -1,8 +1,4 @@
-from django.contrib.auth.models import User
-from django.test import TestCase
-import pytest
-from app.models import *
-from app.utils import *
+from app.tests.utils import *
 
 
 #################   TESTS FOR CREATE MODELS   ####################

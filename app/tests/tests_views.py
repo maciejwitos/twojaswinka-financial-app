@@ -1,10 +1,5 @@
-from django.contrib.auth.models import User
-from django.test import TestCase
-import pytest
-from app.models import *
-from app.utils import *
+from app.tests.utils import *
 from django.test import Client
-from app.views import Dashboard
 
 client = Client()
 

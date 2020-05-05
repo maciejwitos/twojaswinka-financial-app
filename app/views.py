@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DeleteView, FormView
-from app.forms import SignUpForm
+from app.user.user_forms import SignUpForm
 from app.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import DeletionMixin
@@ -19,11 +19,6 @@ from app.currency.currency_form import *
 from app.transactions.transaction_form import AddTransactionForm
 from decimal import Decimal
 from app.category.category_config import *
-from app.accounts.accounts_config import *
-from app.currency.currency_config import *
-from app.budgets.budgets_config import *
-from app.user.user_config import *
-from app.transactions.transactins_config import *
 from scraper.update_currencies_values import read_values
 
 
