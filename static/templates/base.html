@@ -67,86 +67,87 @@ scratch. This page gets rid of all links and provides the needed markup only.
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="{% url "dashboard" %}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard</p>
+                            <i class="fas fa-columns nav-icon"></i>
+                            <p><strong>Dashboard</strong></p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url "all-transaction" %}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Transakcje</p>
+                            <i class="fas fa-receipt nav-icon"></i>
+                            <p><strong>Transakcje</strong></p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url "all-account" %}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Twoje Banki</p>
+                            <i class="fas fa-credit-card nav-icon"></i>
+                            <p><strong>Konta</strong></p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url "all-category" %}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Twoje Kategorie</p>
+                            <i class="fas fa-swatchbook nav-icon"></i>
+                            <p><strong>Kategorie</strong></p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url "all-budget" %}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Zaplanowane Budżety</p>
+                            <i class="fas fa-wallet nav-icon"></i>
+                            <p><strong>Budżety</strong></p>
                         </a>
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-plus"></i>
                             <p>
-                                Akcje
+                                Dodaj ...
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-
                             <li class="nav-item">
                                 <a href="{% url "add-transaction" %}" class="nav-link   ">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-plus nav-icon"></i>
                                     <p>Dodaj transakcje</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{% url "add-account" %}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-plus nav-icon"></i>
                                     <p>Dodaj bank</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{% url "add-category" %}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-plus nav-icon"></i>
                                     <p>Dodaj kategorie</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{% url "add-budget" %}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-plus nav-icon"></i>
                                     <p>Dodaj budżet</p>
                                 </a>
                             </li>
                             {% if perms.app.add_logentry %}
                                 <li class="nav-item">
                                     <a href="{% url "add-currency" %}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fas fa-plus nav-icon"></i>
                                         <p>Dodaj walutę</p>
                                     </a>
                                 </li>
                             {% endif %}
-
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{% url "user-details" %}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            Panel użytkownika
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>Panel użytkownika</p>
                         </a>
+                    </li>
                     <li class="nav-item">
-                        <a href="{% url "logout" %}" class="nav-link">Wyloguj</a>
+                        <a href="{% url "logout" %}" class="nav-link">
+                            <i class="nav-icon fas fa-power-off"></i>
+                            <p>Wyloguj</p></a>
                     </li>
                 </ul>
             </nav>

@@ -4,9 +4,15 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Twoje kategorie w tym miesiącu: </h3>
+                    <div class="card-header ">
+                        <h3 class="card-title">Budżety zaplanowane na ten miesiąc: </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
+
                     <div class="card-body table-responsive p-0" style="height: 400px;">
                         <table class="table table-bordered">
                             <thead>
@@ -59,28 +65,61 @@
                         </table>
                     </div>
                 </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Twój majątek</h3>
+
+
+                <div class="card col-6">
+                    <div class="card-header">
+                        <h3 class="card-title">Twój majątek</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
                         </div>
-                        <div class="card-body" style="height: 125px;">
-                            <div class="align-content-center p-0">
-                                {% if my_wealth < 0 %}
-                                    <p class="text-center" style="font-size: 40px; color: red"><strong>{{ my_wealth }}
-                                        zł</strong></p>
-                                {% else %}
-                                    <p class="text-center" style="font-size: 40px; color: green">
-                                        <strong>{{ my_wealth }} zł</strong></p>
-                                {% endif %}
-                            </div>
+                    </div>
+                    <div class="card-body" style="height: 125px;">
+                        <div class="align-content-center p-0">
+                            {% if my_wealth < 0 %}
+                                <p class="text-center" style="font-size: 40px; color: red"><strong>{{ my_wealth }}
+                                    zł</strong></p>
+                            {% else %}
+                                <p class="text-center" style="font-size: 40px; color: green">
+                                    <strong>{{ my_wealth }} zł</strong></p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+                    <div class="card-header">
+                        <h3 class="card-title">Twój majątek</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="height: 125px;">
+                        <div class="align-content-center p-0">
+                            {% if my_wealth < 0 %}
+                                <p class="text-center" style="font-size: 40px; color: red"><strong>{{ my_wealth }}
+                                    zł</strong></p>
+                            {% else %}
+                                <p class="text-center" style="font-size: 40px; color: green">
+                                    <strong>{{ my_wealth }} zł</strong></p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+            </div>
 
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Twoje Konta</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body table-responsive p-0" style="height: 250px;">
                         <table class="table table-sm">
@@ -123,6 +162,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Waluty</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="card-body p-6">
@@ -159,6 +203,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Twoje transakcje w tym miesiącu:</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <form action="#transaction-table" method="post">
@@ -201,9 +250,9 @@
                                         <td></td>
                                         <td>{{ transaction.date }}</td>
                                         {% if transaction.is_income == True %}
-                                        <td style="color:green;">{{ transaction.amount }} {{ transaction.account.currency }}</td>
+                                            <td style="color:green;">{{ transaction.amount }} {{ transaction.account.currency }}</td>
                                         {% else %}
-                                        <td>{{ transaction.amount }} {{ transaction.account.currency }}</td>
+                                            <td>{{ transaction.amount }} {{ transaction.account.currency }}</td>
                                         {% endif %}
                                         <td>{{ transaction.comment }}</td>
                                         <td>{{ transaction.category }}</td>
