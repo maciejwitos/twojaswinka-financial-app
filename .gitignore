@@ -7,6 +7,8 @@ __pycache__
 db.sqlite3
 media
 TwojaSwinka/local_config.py
+pytest.ini
+.pytest_cache
 
 # Backup files #
 *.bak
