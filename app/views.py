@@ -50,16 +50,28 @@ class Dashboard(LoginRequiredMixin, View):
             user=request.user).filter(
             date__month=date.today().month).filter(
             date__year=date.today().year).order_by('-expenses')
+
         my_wealth = 0
         for account in accounts:
             balance = account.balance
             balance_in_pln = balance * account.currency.in_pln
             my_wealth += balance_in_pln
+
+        monthly_spending = 0
+        monthly_budget = 0
+
+        for budget in budgets:
+            category_budget = budget.budget
+            expenses = budget.expenses
+            monthly_spending += expenses
+            monthly_budget += category_budget
         return render(request, 'dashboard.html', {'currencies': currencies,
                                                   'transactions': transactions,
                                                   'accounts': accounts,
                                                   'budgets': budgets,
-                                                  'my_wealth': round(my_wealth, 2)})
+                                                  'my_wealth': round(my_wealth, 2),
+                                                  'monthly_spending': monthly_spending,
+                                                  'monthly_budget': monthly_budget})
 
     def post(self, request):
         data = request.POST.get('search_transaction')
