@@ -7,3 +7,8 @@ asgiref==3.2.7
 setuptools==40.8.0
 sqlparse==0.3.1
 psycopg2-binary==2.8.5
+pytest==5.4.1
+pytest-django==3.9.0
+Faker==4.0.3
+
+

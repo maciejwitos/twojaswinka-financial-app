@@ -1,31 +1,55 @@
-from app.tests.tests import *
+import pytest
 from app.models import *
 from faker import Faker
 
-faker = Faker()
+fake = Faker()
 
 
-def get_random_user():
-    user = User.objects.create_user(
-        username=faker.name(), email='test@test.pl', password='top_secret')
+@pytest.mark.django_db
+def fake_user():
+    user = User.objects.create(username=fake.first_name_male())
     return user
 
 
-def create_fake_account():
-    account = Account.objects.create(name='fake_bank_name',
-                                     bank='fake_bank',
-                                     balance=100,
-                                     currency=create_fake_currency(),
-                                     user=get_random_user())
-    return account
-
-
-def create_fake_currency():
-    currency = Currency.objects.create(name='PLN', in_pln=1)
+@pytest.mark.django_db
+def fake_currency():
+    currency = Currency.objects.create(name=fake.currency_code(),
+                                       in_pln=1)
     return currency
 
 
-def create_fake_category():
-    category = Category.objects.create(name='Kategoria',
-                                       user=get_random_user())
+@pytest.mark.django_db
+def fake_category():
+    category = Category.objects.create(name=fake.safe_color_name(),
+                                       user=fake_user())
     return category
+
+
+@pytest.mark.django_db
+def fake_account():
+    account = Account.objects.create(bank=fake.first_name_female(),
+                                     name=fake.first_name_male(),
+                                     balance=999,
+                                     currency=fake_currency(),
+                                     user=fake_user())
+    return account
+
+
+@pytest.mark.django_db
+def fake_budget():
+    budget = Budget.objects.create(category=fake_category(),
+                                   budget=999,
+                                   date=fake.date(),
+                                   user=fake_user())
+    return budget
+
+
+@pytest.mark.django_db
+def fake_transaction():
+    transaction = Transaction.objects.create(date=fake.date(),
+                                             comment=fake.name(),
+                                             amount=999,
+                                             account=fake_account(),
+                                             category=fake_category(),
+                                             user=fake_user())
+    return transaction

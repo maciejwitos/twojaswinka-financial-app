@@ -10,7 +10,7 @@ class AddTransaction(LoginRequiredMixin, View):
 
     def get(self, request):
         """
-        :param request:
+        :param: request:
         :return: AddTransactionForm site
         """
         form = AddTransactionForm(request.user, initial={'user': request.user})
@@ -19,7 +19,7 @@ class AddTransaction(LoginRequiredMixin, View):
     def post(self, request):
         """
 
-        :param request:
+        :param: request:
         :return: creating new transaction and updating balances
         """
         form = AddTransactionForm(request.user, request.POST, initial={'user': request.user})
@@ -36,14 +36,17 @@ class AddTransaction(LoginRequiredMixin, View):
                 user=request.user
             )
 
-            # assign transaction amount
-            amount = form.cleaned_data['amount']
-
             # assign boolean value is it income or not
             is_income = form.cleaned_data['is_income']
 
-            # update account balance
+            # assign choose account
             bank = form.cleaned_data['account']
+
+            # assign transaction amount
+            amount = form.cleaned_data['amount']
+            amount_in_pln = amount * bank.currency.in_pln
+
+            # update account balance
             if is_income:
                 bank.balance += amount
             else:
@@ -52,7 +55,7 @@ class AddTransaction(LoginRequiredMixin, View):
 
             # update category balance
             category = form.cleaned_data['category']
-            category.spending += amount
+            category.spending += amount_in_pln
             category.save()
 
             """
@@ -71,7 +74,7 @@ class AddTransaction(LoginRequiredMixin, View):
                     date__month=transaction_date.month).filter(
                     date__year=transaction_date.year)
                 budget = Budget.objects.get(id=budgets[0].id)
-                budget.expenses += amount
+                budget.expenses += amount_in_pln
                 budget.save()
             except IndexError:
                 pass
@@ -125,6 +128,10 @@ class EditTransaction(LoginRequiredMixin, UpdateView):
         # gets date of transaction
         transaction_date = datetime.datetime.strptime(self.get_form().data['date'], '%d.%m.%Y')
 
+        # gets amount_in_pln
+        amount = transaction.amount
+        amount_in_pln = amount * transaction.account.currency.in_pln
+
         # assign old_budget
         try:
             budgets = Budget.objects.filter(
@@ -133,17 +140,17 @@ class EditTransaction(LoginRequiredMixin, UpdateView):
                 date__month=transaction_date.month).filter(
                 date__year=transaction_date.year)
             old_budget = Budget.objects.get(id=budgets[0].id)
-            old_budget.expenses -= transaction.amount
+            old_budget.expenses -= amount_in_pln
             old_budget.save()
         except IndexError:
             pass
 
         # updates old balances for accounts, category and budgets
         if transaction.is_income:
-            transaction.account.balance -= transaction.amount
+            transaction.account.balance -= amount
         else:
-            transaction.account.balance += transaction.amount
-        transaction.category.spending -= transaction.amount
+            transaction.account.balance += amount
+        transaction.category.spending -= amount_in_pln
 
         # saves updated models
         transaction.account.save()
@@ -155,6 +162,7 @@ class EditTransaction(LoginRequiredMixin, UpdateView):
 
         # takes new amount from form
         new_amount = float(self.request.POST.get('amount'))
+        new_amount_in_pln = Decimal(new_amount) * new_account.currency.in_pln
 
         try:
             budgets = Budget.objects.filter(
@@ -163,7 +171,7 @@ class EditTransaction(LoginRequiredMixin, UpdateView):
                 date__month=transaction_date.month).filter(
                 date__year=transaction_date.year)
             new_budget = Budget.objects.get(id=budgets[0].id)
-            new_budget.expenses += Decimal(new_amount)
+            new_budget.expenses += Decimal(new_amount_in_pln)
             new_budget.save()
         except IndexError:
             pass
@@ -173,7 +181,7 @@ class EditTransaction(LoginRequiredMixin, UpdateView):
             new_account.balance += Decimal(new_amount)
         else:
             new_account.balance -= Decimal(new_amount)
-        new_category.spending += Decimal(new_amount)
+        new_category.spending += Decimal(new_amount_in_pln)
 
         # saves models
         new_account.save()
@@ -202,6 +210,9 @@ class DeleteTransaction(LoginRequiredMixin, DeleteView):
         # gets data about deleted objects and related models
         transaction = Transaction.objects.get(id=kwargs['pk'])
 
+        amount = transaction.amount
+        amount_in_pln = amount * transaction.account.currency.in_pln
+
         # gets data about account, category and budget
         bank = transaction.account
         category = transaction.category
@@ -219,17 +230,17 @@ class DeleteTransaction(LoginRequiredMixin, DeleteView):
 
         # refunds for category, account and budget balances
         if category is not None:
-            category.spending -= transaction.amount
+            category.spending -= amount_in_pln
             category.save()
         if bank is not None:
             if transaction.is_income:
-                bank.balance -= transaction.amount
+                bank.balance -= amount
             else:
-                bank.balance += transaction.amount
+                bank.balance += amount
             bank.save()
         try:
             if budget is not None:
-                budget.expenses -= transaction.amount
+                budget.expenses -= amount_in_pln
                 budget.save()
         except:
             pass

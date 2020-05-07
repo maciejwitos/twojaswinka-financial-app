@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card col-12">
+        <div class="card-header">
+            <div class="card-body">
+                <div class="card-body">
+                    <div class="row">
+                        <ul class="list-inline">
+                            <li>Login:</li><li><strong>{{ user.username }}</strong></li>
+                            <li>Email:</li><li><strong>{{ user.email }}</strong></li>
+                            <li>Ostatnio widziany:</li><li><strong>{{ user.last_login }}</strong></li>
+                            <li>Dołączono:</li><li><strong>{{ user.date_joined }}</strong></li>
+                            <hr>
+                            <li><a href="{% url "change-password" %}">Zmień hasło</a></li>
+                            <li><a href="/user/delete/{{ user.id }}/">Usuń konto</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

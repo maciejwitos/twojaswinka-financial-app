@@ -1,4 +1,4 @@
-from app.forms import *
+from app.user.user_forms import *
 
 
 class AddCategoryForm(forms.Form):

@@ -1,4 +1,5 @@
 from app.views import *
+import datetime
 
 
 class AddBudget(LoginRequiredMixin, View):
@@ -16,7 +17,7 @@ class AddBudget(LoginRequiredMixin, View):
                                   category=Category.objects.get(id=form.data.get('category')),
                                   budget=form.data.get('budget'),
                                   date=str(form.data.get('date')) + '-01')
-            return redirect('dashboard')
+            return redirect('all-budget')
         except:
             return redirect('404')
 
@@ -28,7 +29,7 @@ class ViewBudgets(LoginRequiredMixin, View):
         budgets = Budget.objects.filter(
             user=request.user).filter(
             date__month=date.today().month).filter(
-            date__year=date.today().year)
+            date__year=date.today().year).order_by('-expenses')
         return render(request, 'budget/budget_all.html', {'budgets': budgets})
 
     def post(self, request):
@@ -40,7 +41,7 @@ class ViewBudgets(LoginRequiredMixin, View):
         budgets = Budget.objects.filter(
             user=request.user).filter(
             date__month=date_search.month).filter(
-            date__year=date_search.year)
+            date__year=date_search.year).order_by('-expenses')
         return render(request, 'budget/budget_all.html', {'budgets': budgets})
 
 
@@ -51,7 +52,12 @@ class DetailsBudget(LoginRequiredMixin, View):
         budget = Budget.objects.get(id=pk)
         if not request.user.pk == budget.user.pk:
             return redirect('/404/')
-        return render(request, 'budget/budget_details.html', {'budget': budget})
+        transactions = Transaction.objects.filter(
+            category=budget.category).filter(
+            date__month=budget.date.month).filter(
+            date__year=budget.date.year).order_by('-date')
+        return render(request, 'budget/budget_details.html', {'budget': budget,
+                                                              'transactions': transactions})
 
 
 class EditBudget(LoginRequiredMixin, UpdateView):

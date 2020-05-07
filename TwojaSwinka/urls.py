@@ -1,13 +1,18 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from app.accounts.accounts_config import AddAccount, ReadAccounts, DetailsAccount, EditAccount, DeleteAccount
+from app.budgets.budgets_config import AddBudget, ViewBudgets, DetailsBudget, DeleteBudget, EditBudget
+from app.currency.currency_config import AddCurrency, ReadCurrency, EditCurrency, DeleteCurrency
+from app.transactions.transactins_config import AddTransaction, ReadTransactions, EditTransaction, DeleteTransaction
+from app.user.user_config import SignUp, PasswordReset, UserDetails, DeleteUser
 from app.views import *
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('dashboard/', Dashboard.as_view(), name='dashboard'),
-    path('', Dashboard.as_view(), name='dashboard'),
+    path('', HomePage.as_view(), name='homepage'),
     path('404/', View404.as_view(), name='404'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', SignUp.as_view(), name='register-form'),
@@ -33,6 +38,8 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='user/password_reset_complete.html'),
          name='password-reset-complete'),
     path('details/', UserDetails.as_view(), name='user-details'),
+    path('user/delete/<pk>/', DeleteUser.as_view(template_name='confirm_delete.html', success_url='/login/'),
+         name='user-delete'),
 
     path('category/add/', AddCategory.as_view(), name='add-category'),
     path('category/all/', ReadCategories.as_view(), name='all-category'),

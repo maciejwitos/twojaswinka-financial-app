@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header ">
+                        <h3 class="card-title">Budżety zaplanowane na ten miesiąc: </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body table-responsive p-0" style="height: 400px;">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Nazwa</th>
+                                <th>Budżet</th>
+                                <th>Wydatki</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if categories.count == 0 %}
+                                <td colspan="4"><a href="{% url "add-category" %}">
+                                    <button class="btn btn-block btn-success btn-s">Dodaj pierwszą kategorię</button>
+                                </a></td>
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                        Utwórz pierwszą kategorię aby móc dodawać transakcje.
+                                        Możesz też zaplanować miesięczny budżet dla każdej kategorii,
+                                        który będzie wyświetlać się w tej sekcji.
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% if budgets.count == 0 %}
+                                <td colspan="4"><a href="{% url "add-budget" %}">
+                                    <button class="btn btn-block btn-success btn-s">Dodaj pierwszy budżet</button>
+                                </a></td>
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                        Tu będą wyświetlać się wszystkie twoje
+                                        kategorie z zaplanowanym budżetem na bierzący
+                                        miesiąc. <strong>Musisz utworzyć kategorię, aby móc
+                                        zaplanować dla niej budżet.</strong>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% for budget in budgets %}
+                                <tr>
+                                    <td></td>
+                                    <td>{{ budget.category.name }}</td>
+                                    <td>{{ budget.budget }} zł</td>
+                                    {% if budget.budget < budget.expenses %}
+                                        <td style="color: #fabd00">{{ budget.expenses }} zł</td>
+                                    {% else %}
+                                        <td style="color: darkgreen">{{ budget.expenses }} zł</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card col-6 float-right">
+                    <div class="card-header">
+                        <h4 class="card-title">Wydatki / Budżet</h4>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body" style="height: 125px;">
+                        <div class="align-content-center">
+                            {% if monthly_spending > monthly_budget %}
+                                <p class="text-center" style="font-size: 20px;"><strong style="color: #fabd00">
+                                    {{ monthly_spending }} zł</strong> / {{ monthly_budget }} zł</p>
+                            {% else %}
+                                <p class="text-center" style="font-size: 20px"><strong>
+                                    {{ monthly_spending }} zł</strong> / {{ monthly_budget }} zł</p>
+                            {% endif %}
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card col-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Twój majątek</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="height: 125px;">
+                        <div class="align-items-center border-bottom">
+                            {% if my_wealth < 0 %}
+                                <p class="text-center " style="font-size: 25px; color: red"><strong>{{ my_wealth }}
+                                    zł</strong></p>
+                            {% else %}
+                                <p class="text-center" style="font-size: 25px; color: green">
+                                    <strong>{{ my_wealth }} zł</strong></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Twoje Konta</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0" style="height: 250px;">
+                        <table class="table table-sm">
+                            <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Nazwa</th>
+                                <th>Bank</th>
+                                <th>Saldo</th>
+                                <th>Waluta</th>
+                            </tr>
+                            </thead>
+                            {% if accounts.count == 0 %}
+                                <td colspan="5"><a href="{% url "add-account" %}">
+                                    <button class="btn btn-block btn-success btn-s">Dodaj pierwsze konto</button>
+                                </a></td>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        W tej sekcji znajdziesz wszystkie twoje konta.
+                                        Utwórz swoje pierwsze konto abyś mógł/mogła zacząć
+                                        dodawać transakcje.
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% for account in accounts %}
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>{{ account.name }}</td>
+                                    <td>{{ account.bank }}</td>
+                                    <td>{{ account.balance }}</td>
+                                    <td>{{ account.currency }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Waluty</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-6">
+                        <table class="table table-sm">
+                            <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Nazwa</th>
+                                <th>Kurs</th>
+                            </tr>
+                            </thead>
+                            {% for currency in currencies %}
+                                <tbody>
+                                <tr>
+                                    {% if currency.name != "PLN" %}
+                                        <td></td>
+                                        <td>{{ currency.name }}</td>
+                                        <td>{{ currency.in_pln }} zł</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Twoje transakcje w tym miesiącu:</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="#transaction-table" method="post">
+                                {% csrf_token %}
+                                <div class="input-group input-group-sm" style="width: 200px;">
+                                    <input type="text" name="search_transaction" class="form-control float-right"
+                                           placeholder="Szukaj w transakcjach">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default"><i
+                                                class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Data</th>
+                                    <th>Kwota</th>
+                                    <th>Opis</th>
+                                    <th>Kategoria</th>
+                                    <th>Konto</th>
+                                </tr>
+                                </thead>
+                                <tbody id="transaction-table">
+                                {% if transactions.count == 0 %}
+                                    <tr>
+                                        <td colspan="7" class="text-center">
+                                            W tej sekcji znajdziesz wszystkie transakcje dokonane
+                                            w bierzącym miesiącu. Możesz użyć wyszukiwarki aby
+                                            znaleźć konkretną transakcję wpisując jej opis lub kwotę.
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% for transaction in transactions %}
+                                    <tr>
+                                        <td></td>
+                                        <td>{{ transaction.date }}</td>
+                                        {% if transaction.is_income == True %}
+                                            <td style="color:green;">{{ transaction.amount }} {{ transaction.account.currency }}</td>
+                                        {% else %}
+                                            <td>{{ transaction.amount }} {{ transaction.account.currency }}</td>
+                                        {% endif %}
+                                        <td>{{ transaction.comment }}</td>
+                                        <td>{{ transaction.category }}</td>
+                                        <td>{{ transaction.account }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
