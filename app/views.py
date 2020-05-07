@@ -22,6 +22,11 @@ from app.category.category_config import *
 from scraper.update_currencies_values import read_values
 
 
+class HomePage(View):
+    def get(self, request):
+        return render(request, 'homepage.html')
+
+
 class Dashboard(LoginRequiredMixin, View):
     """
     Main View Dashboard. When run it's:

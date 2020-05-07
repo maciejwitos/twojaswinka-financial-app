@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('dashboard/', Dashboard.as_view(), name='dashboard'),
-    path('', Dashboard.as_view(), name='dashboard'),
+    path('', HomePage.as_view(), name='homepage'),
     path('404/', View404.as_view(), name='404'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', SignUp.as_view(), name='register-form'),
