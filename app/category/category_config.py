@@ -20,7 +20,6 @@ class AddCategory(LoginRequiredMixin, View):
         return redirect('all-category')
 
 
-# Wyświetlanie wszystkich kategorii
 class ReadCategories(LoginRequiredMixin, View):
     login_url = '/login/'
 
@@ -29,7 +28,6 @@ class ReadCategories(LoginRequiredMixin, View):
         return render(request, 'category/category_all.html', {'categories': categories})
 
 
-# Edytowanie kategorii
 class EditCategory(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     fields = ('name', 'spending')
@@ -54,7 +52,6 @@ class DetailsCategory(LoginRequiredMixin, View):
                                                                   'transactions': transactions})
 
 
-# Usuwanie kategorii
 class DeleteCategory(LoginRequiredMixin, DeleteView):
     login_url = '/login/'
     model = Category

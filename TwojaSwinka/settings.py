@@ -1,17 +1,10 @@
 import os
-#from TwojaSwinka.local_config import *
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'jck=#_*hl%n^scdw26m%8q1hi4f@7m_)a16!tjsziyx6niykuo'
 
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
-ADMINS = [('mac.witos.admin', 'twoja.swinka.pl@gmail.com')]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,7 +13,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
     'app',
 ]
 
@@ -52,26 +44,17 @@ TEMPLATES = [
     },
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'twojaswinkadb',
-        'USER': 'maciejwitos',
-        'PASSWORD': 'PostgreSQL2020',
-        'HOST': 'twojaswinkadb.cv9ikkunke92.eu-central-1.rds.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+DATABASES = {}
 
 WSGI_APPLICATION = 'TwojaSwinka.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = ''
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'twoja.swinka.pl@gmail.com'
-EMAIL_HOST_PASSWORD = 'Twoja$winka2020'
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'Twoja Świnka twoja.swinka.pl@gmail.com'
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 000
+DEFAULT_FROM_EMAIL = ''
 
 AUTH_PASSWORD_VALIDATORS = [
     {
