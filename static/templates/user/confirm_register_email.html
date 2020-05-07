@@ -1,0 +1,16 @@
+{% autoescape off %}
+    Witaj {{ user.username }}!
+
+    Dziękujemy za rejestrację w naszym serwisie. Mamy nadzieję, że narzędzie jakim jest
+    TwojaŚwinka sprosta twoim oczekiwaniom i przyczyni się do większej kontroli nad twoimi finansami.
+
+    Zanim zaczniemy, bardzo proszę, kliknij w link potwierdzający twoją rejestrację
+
+    Link: http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+    W razie pojawiających się pytań, jesteśmy dostępni pod adresem: twoja.swinka.pl@gmail.com
+
+    Dziękujemy za rejestrację!
+
+    Zespół TwojaŚwinka
+{% endautoescape %}

@@ -5,7 +5,7 @@ from app.accounts.accounts_config import AddAccount, ReadAccounts, DetailsAccoun
 from app.budgets.budgets_config import AddBudget, ViewBudgets, DetailsBudget, DeleteBudget, EditBudget
 from app.currency.currency_config import AddCurrency, ReadCurrency, EditCurrency, DeleteCurrency
 from app.transactions.transactins_config import AddTransaction, ReadTransactions, EditTransaction, DeleteTransaction
-from app.user.user_config import SignUp, PasswordReset, UserDetails, DeleteUser
+from app.user.user_config import SignUp, PasswordReset, UserDetails, DeleteUser, ActiveUser
 from app.views import *
 
 urlpatterns = [
@@ -16,6 +16,7 @@ urlpatterns = [
     path('404/', View404.as_view(), name='404'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', SignUp.as_view(), name='register-form'),
+    path('activate/<uidb64>/<token>/', ActiveUser.as_view(), name='activate'),
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='logout'),
     path('password_change/', auth_views.PasswordChangeView.as_view(template_name='user/password_change.html',
