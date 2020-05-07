@@ -4,6 +4,11 @@ from django.test import Client
 client = Client()
 
 
+def test_view_homepage_get():
+    response = client.get('/')
+    assert response.status_code == 200
+
+
 def test_view_dashboard_get():
     response = client.get('/dashboard/')
     assert response.status_code == 302
