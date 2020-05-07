@@ -4,6 +4,8 @@ from app.views import *
 class SignUp(View):
 
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('dashboard')
         form = SignUpForm()
         return render(request, 'user/register.html', {'form': form})
 

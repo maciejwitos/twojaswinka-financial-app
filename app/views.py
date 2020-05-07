@@ -24,6 +24,8 @@ from scraper.update_currencies_values import read_values
 
 class HomePage(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('dashboard')
         return render(request, 'homepage.html')
 
 
