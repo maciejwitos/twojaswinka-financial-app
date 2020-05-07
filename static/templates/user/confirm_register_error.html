@@ -1,0 +1,7 @@
+{% extends 'user/user_base.html' %}
+{% load static %}
+{% block user_body %}
+    <div class="text-center">
+    Coś poszło nie tak. Nieprawidłowy link aktywacyjny, lub link wygasł. Wróć do <a href="{% url 'homepage' %}">strony głównej</a>.
+  </div>
+{% endblock %}
