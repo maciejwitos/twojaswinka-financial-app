@@ -52,7 +52,12 @@ class DetailsBudget(LoginRequiredMixin, View):
         budget = Budget.objects.get(id=pk)
         if not request.user.pk == budget.user.pk:
             return redirect('/404/')
-        return render(request, 'budget/budget_details.html', {'budget': budget})
+        transactions = Transaction.objects.filter(
+            category=budget.category).filter(
+            date__month=budget.date.month).filter(
+            date__year=budget.date.year).order_by('-date')
+        return render(request, 'budget/budget_details.html', {'budget': budget,
+                                                              'transactions': transactions})
 
 
 class EditBudget(LoginRequiredMixin, UpdateView):
